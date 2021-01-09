@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import Search from '../components/Search';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -19,7 +20,16 @@ function Home() {
           <Avatar />
         </div>
       </div>
-      <div className="home__body"></div>
+      <div className="home__body">
+        <img
+          src="https://www.google.co.in/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+          alt=""
+        />
+        <div className="home__inputContainer">
+          {/* Search */}
+          <Search />
+        </div>
+      </div>
     </div>
   );
 }
