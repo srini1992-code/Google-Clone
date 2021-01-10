@@ -46,3 +46,6 @@
 .search__buttons button:focus {
   border: 1px solid blue;
 }
+.search__buttonsHidden {
+  display: none;
+}
