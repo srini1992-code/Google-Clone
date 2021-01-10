@@ -5,12 +5,12 @@ export const StateContext = createContext();
 // initialState-how the datalayer looks like when the app is loaded
 // reducer-listens to changes and dispatches an action as what something happened to state,but not how it happend
 // hoc
-export const StateProvider = ({ initialState, reducer, children }) => {
+export const StateProvider = ({ initialState, reducer, children }) => (
   <StateContext.Provider value={useReducer(reducer, initialState)}>
     {/* app */}
     {children}
-  </StateContext.Provider>;
-};
+  </StateContext.Provider>
+);
 
 // hook allows us to pull information from data layer
 export const useStateValue = () => useContext(StateContext);
