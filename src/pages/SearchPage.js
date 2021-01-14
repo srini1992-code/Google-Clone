@@ -13,13 +13,14 @@ import RoomIcon from '@material-ui/icons/Room';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 function SearchPage() {
-	const [{ term }, dispatch] = useStateValue();
+	const [{ term = 'tesla' }, dispatch] = useStateValue();
 	// live api call
-	// const { data } = useGoogleSearch(term);
+	const { data } = useGoogleSearch(term);
 	// not obtained google search api result only search results
-	const data = Response;
+	// mock api call
+	// const data = Response;
 
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<div className="searchPage">
@@ -73,7 +74,38 @@ function SearchPage() {
 					</div>
 				</div>
 			</div>
-			<div className="searchPage__results"></div>
+			{term && (
+				<div className="searchPage__results">
+					<p className="searchPage__resultCount">
+						About{data?.searchInformation.formattedTotalResults}
+						results{data?.searchInformation.formattedSearchTime}
+						seconds for {term}
+					</p>
+					{data?.items.map((item) => (
+						<div className="searchPage__result">
+							<a classname="searchPage__resultLink" href={item.link}>
+								{item.pagemap?.cse_image?.length > 0 &&
+									item.pagemap?.cse_image[0]?.src && (
+										<img
+											className="searchPage__resultPage"
+											src={
+												item.pagemap?.cse_image &&
+												item.pagemap?.cse_image[0]?.src
+											}
+											alt=""
+										/>
+									)}
+								{item.displayLink}▼
+							</a>
+
+							<a className="searchPage__resultTitle" href={item.link}>
+								<h2>{item.title}</h2>
+							</a>
+							<p className="searchPage__resultSnippet">{item.snippet}</p>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
